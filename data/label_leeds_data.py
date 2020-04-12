@@ -1,3 +1,6 @@
+""" 
+To be used with Leeds butterfly dataset.
+"""
 import os, random, shutil
 import numpy as np
 
@@ -27,7 +30,7 @@ def label():
 
         # create main dir to place train and validation data
         create_main_dir()
-        # create subdirectories if necessary
+        # create subdirectories
         for name in CATEGORY_NAMES:
             create_subdir(name)
 
@@ -57,12 +60,9 @@ def create_main_dir():
 def create_subdir(name):
     train_subdir_label = TRAIN_PATH + '/' + name
     validation_subdir_label = VALIDATION_PATH + '/' + name
-
-    # creates dir if it is not already present
-    if not os.path.isdir(train_subdir_label):
-        os.makedirs(train_subdir_label)
-    if not os.path.isdir(validation_subdir_label):
-        os.makedirs(validation_subdir_label)
+    
+    os.makedirs(train_subdir_label)
+    os.makedirs(validation_subdir_label)
 
 def label_data(img):
     category = get_category(img)
