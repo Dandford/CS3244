@@ -36,3 +36,4 @@ def get_data_generator():
         batch_size=BATCH_SIZE)
     
     return [train_generator, validation_generator]
+    
