@@ -50,9 +50,9 @@ def label():
 def create_main_dir():
     # clears dirs and re-create, if they exist
     if os.path.isdir(TRAIN_PATH):
-        os.rmdir(TRAIN_PATH)
+        shutil.rmtree(TRAIN_PATH)
     if os.path.isdir(VALIDATION_PATH):
-        os.rmdir(VALIDATION_PATH)
+        shutil.rmtree(VALIDATION_PATH)
     
     os.makedirs(TRAIN_PATH)
     os.makedirs(VALIDATION_PATH)

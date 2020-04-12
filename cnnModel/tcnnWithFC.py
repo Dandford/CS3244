@@ -3,7 +3,7 @@ from tensorflow.keras.layers import Dense
 
 from Tcnn import Tcnn
 
-NUM_CLASSES = 3
+NUM_CLASSES = 10
 
 """ 
 Uses base_model for transfer learning.

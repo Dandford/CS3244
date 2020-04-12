@@ -22,10 +22,10 @@ if __name__ == "__main__":
     # train
     tcnn.model.fit(
         train_generator,
-        steps_per_epoch=3,
-        epochs=5,
+        steps_per_epoch=2,
+        epochs=10,
         validation_data=validation_generator,
-        validation_steps=2)
+        validation_steps=1)
 
     # to save the model
-    tcnn.model.save(FILENAME)
+    # tcnn.model.save(FILENAME)
