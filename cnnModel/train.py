@@ -4,6 +4,9 @@ from TcnnWithoutFC import TcnnWithoutFC
 
 from tensorflow.keras import applications
 
+# save model to FILENAME
+FILENAME = 'butterfly_classification.h5'
+
 if __name__ == "__main__":
     # create model
     base_model = applications.VGG19()
@@ -19,7 +22,10 @@ if __name__ == "__main__":
     # train
     tcnn.model.fit(
         train_generator,
-        steps_per_epoch=0,
-        epochs=0,
+        steps_per_epoch=3,
+        epochs=5,
         validation_data=validation_generator,
-        validation_steps=0)
+        validation_steps=2)
+
+    # to save the model
+    tcnn.model.save(FILENAME)
