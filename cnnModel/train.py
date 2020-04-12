@@ -6,7 +6,9 @@ from tensorflow.keras import applications
 
 # save model to FILENAME
 FILENAME = 'butterfly_classification.h5'
-
+"""
+To change the number of categories, modify NUM_CLASSES in Tcnn.py
+"""
 if __name__ == "__main__":
     # create model
     base_model = applications.VGG19()
@@ -22,10 +24,10 @@ if __name__ == "__main__":
     # train
     tcnn.model.fit(
         train_generator,
-        steps_per_epoch=2,
-        epochs=10,
+        steps_per_epoch=4,
+        epochs=20,
         validation_data=validation_generator,
-        validation_steps=1)
+        validation_steps=2)
 
     # to save the model
     # tcnn.model.save(FILENAME)

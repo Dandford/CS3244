@@ -3,8 +3,6 @@ from tensorflow.keras.layers import Dense
 
 from Tcnn import Tcnn
 
-NUM_CLASSES = 10
-
 """ 
 Uses base_model for transfer learning.
 Builds model with removal of fully-connected layers. Only output layer is removed.
@@ -22,7 +20,7 @@ class TcnnWithoutFC(Tcnn):
         # add adaptation layers
         feature_fc = feature_list[len(feature_list) - 1]
         fc = Dense(2048, activation='relu')(feature_fc)
-        output = Dense(NUM_CLASSES, activation='softmax')(fc)
+        output = Dense(Tcnn.NUM_CLASSES, activation='softmax')(fc)
         # create model
         model = Model(inputs=self.base_model.input, outputs=output)
         # model.summary() # to view model summary

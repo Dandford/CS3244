@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
 class Tcnn(ABC):
+    NUM_CLASSES = 9
+
     def __init__(self, base_model):
         self.base_model = base_model
         self.model = self.build_model()
