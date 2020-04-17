@@ -58,16 +58,18 @@ def label_data(image_dir):
     # used for labelling of image
     train_label = 1
     validation_label = 1
+    test_label = 1
     total_num = 0
 
     for img in images:
         # determine whether maximum number of images have been exceeded
         if total_num > MAX:
             # add image to test directory instead
-            prefix = dir_name
-            add_to_test(img, prefix, total_num)
-            total_num += 1
+            dest_path = TEST_PATH + '/' + dir_name + '/' + str(test_label) + ext
+            shutil.copy(img, dest_path)
+            test_label += 1
             continue
+
         # randomly decide whether image is to be used for train or validation
         is_train = random.random() < THRESHOLD
         # get file extension
@@ -88,16 +90,13 @@ def create_subdir(image_dir):
     name = image_dir.name.lower().replace(' ', '_')
     train_subdir_label = TRAIN_PATH + '/' + name
     validation_subdir_label = VALIDATION_PATH + '/' + name
+    test_subdir_label = TEST_PATH + '/' + name
 
     os.makedirs(train_subdir_label)
     os.makedirs(validation_subdir_label)
+    os.makedirs(test_subdir_label)
 
     return name
-
-def add_to_test(img, prefix, suffix):
-    filename, ext = os.path.splitext(img)
-    dest_path = '{}/{}_{}{}'.format(TEST_PATH, prefix, suffix, ext)
-    shutil.copy(img, dest_path)
 
 if __name__ == "__main__":
     label()
