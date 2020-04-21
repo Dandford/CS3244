@@ -57,3 +57,8 @@ python3 test.py <image> <weights>
 ```sh
 python3 test.py <folder> <weights>
 ```
+
+- To test using default images but customised weights, run this instead
+```sh
+python3 test.py <weights>
+```
