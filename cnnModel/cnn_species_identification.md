@@ -1,18 +1,15 @@
-# ButterSnap: Butterfly Species Identification with CNN
-
-<!-- GETTING STARTED -->
-## Getting Started 
+# *ButterSnap*: Butterfly Species Identification with CNN
 
 In this section, you will find out how you can train and/or test the models used for *ButterSnap*.
 
-### Predicting Butterfly Species
+## Predicting Butterfly Species
 
 1. Run `test.py`, and pass the path of the image `<image>` as an argument.
 ```sh
 python3 test.py <image>
 ```
 
-### Testing the CNN Model with Default Images
+## Testing the CNN Model with Default Images
 
 1. Run the script `../data/label_data.py` to obtain default test images.
 ```sh
@@ -24,7 +21,7 @@ python3 ../data/label_data.py
 python3 test.py
 ```
 
-### Testing the CNN Model with Customised Images
+## Testing the CNN Model with Customised Images
 
 1. Place your test images in appropriately-labelled sub-folders. Each of the sub-folder should contain images of
 butterflies of a specific species. For instance, 
@@ -43,4 +40,16 @@ butterflies of a specific species. For instance,
 3. Now, run `test.py` and pass the directory `<folder>` as an argument.
 ```sh
 python3 test.py <folder>
+```
+
+## Tips:
+
+- To predict butterfly species using customised weights, run this instead
+```sh
+python3 test.py <image> <weights>
+```
+
+- Similarly, to test using customised images and weights, run this instead
+```sh
+python3 test.py <folder> <weights>
 ```
