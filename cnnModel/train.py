@@ -1,6 +1,6 @@
 from datagen import get_data_generator
-from TcnnWithFC import TcnnWithFC
-from TcnnWithoutFC import TcnnWithoutFC
+from tcnn.TcnnWithFC import TcnnWithFC
+from tcnn.TcnnWithoutFC import TcnnWithoutFC
 from tensorflow.keras import applications
 from tensorflow.keras.models import load_model
 
