@@ -4,6 +4,7 @@ Before running this script, please place directories (not nested directories) wh
 ../butterflies.
 """
 import os, random, shutil
+import numpy as np
 
 TRAIN_PATH = "train"
 VALIDATION_PATH = "validation"
@@ -55,23 +56,27 @@ def label_data(image_dir):
     # obtain images
     images = os.scandir(image_dir)
 
+    # create array for randomisation
+    temp_validation = np.zeros(int(MAX * (1 - THRESHOLD)) + 1)
+    temp_train = np.ones(int(MAX * THRESHOLD))
+    randomiser = np.concatenate((temp_validation, temp_train))
+    random.shuffle(randomiser)
+
     # used for labelling of image
     train_label = 1
     validation_label = 1
     test_label = 1
-    total_num = 0
 
-    for img in images:
+    for i, img in enumerate(images, 1):
         # determine whether maximum number of images have been exceeded
-        if total_num > MAX:
+        if i > len(randomiser):
             # add image to test directory instead
             dest_path = TEST_PATH + '/' + dir_name + '/' + str(test_label) + ext
             shutil.copy(img, dest_path)
             test_label += 1
             continue
-
         # randomly decide whether image is to be used for train or validation
-        is_train = random.random() < THRESHOLD
+        is_train = randomiser[i - 1]
         # get file extension
         filename, ext = os.path.splitext(img)
 
@@ -83,8 +88,6 @@ def label_data(image_dir):
             dest_path = VALIDATION_PATH + '/' + dir_name + '/' + str(validation_label) + ext
             shutil.copy(img, dest_path)
             validation_label += 1
-        
-        total_num += 1
 
 def create_subdir(image_dir):
     name = image_dir.name.lower().replace(' ', '_')
