@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array, ImageDa
 from tensorflow.keras.preprocessing import image
 
 # indicates where model is saved to (should correspond to that in train.py)
-FILENAME = 'butterfly_classification.h5'
+FILENAME = 'butterfly_classification_5.h5'
 # default testing data's path (to get data, run ../data/label_data.py)
 TEST_DATA = "../data/test"
 # default image size to use
@@ -35,7 +35,10 @@ def evaluate_butterfly():
         target_size=(IMG_SIZE, IMG_SIZE), 
         batch_size=BATCH_SIZE)
     model = load_model(FILENAME)
-    model.evaluate_generator(test_generator)
+    model.compile(optimizer='Adam', 
+        loss='categorical_crossentropy',
+        metrics=['categorical_accuracy', 'acc'])
+    model.evaluate(test_generator)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2 and os.path.isdir(TEST_DATA):

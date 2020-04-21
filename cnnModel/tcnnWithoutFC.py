@@ -5,7 +5,7 @@ from Tcnn import Tcnn
 
 """ 
 Uses base_model for transfer learning.
-Builds model with removal of fully-connected layers. Only output layer is removed.
+Builds model with removal of fully-connected layers. 
 Two additional adaptation layers are added. 
 """ 
 class TcnnWithoutFC(Tcnn):

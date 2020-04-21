@@ -1,6 +1,6 @@
 """ 
 To be used with dataset collected by @leongjwm and @huaren06
-Before running this script, please place directories which contain the images (not nested directories) in
+Before running this script, please place directories (not nested directories) which contain the images in
 ../butterflies.
 """
 import os, random, shutil
