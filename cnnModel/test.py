@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array, ImageDa
 from tensorflow.keras.preprocessing import image
 
 # indicates where model is saved to (should correspond to that in train.py)
-FILENAME = 'weights/butterfly_classification_2.h5'
+FILENAME = 'butterfly_classification.h5'
 # default testing data's path (to get data, run ../data/label_data.py)
 TEST_DATA = "../data/test"
 # default image size to use

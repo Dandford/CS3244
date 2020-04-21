@@ -2,6 +2,10 @@
 
 In this section, you will find out how you can train and/or test the models used for *ButterSnap*.
 
+## Download Pre-Trained Model
+
+1. Download 'butterfly_classification.h5' and place it in this directory.
+
 ## Predicting Butterfly Species
 
 1. Run `test.py`, and pass the path of the image `<image>` as an argument.
