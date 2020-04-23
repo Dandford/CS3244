@@ -1,3 +1,9 @@
+"""
+To change the number of categories, modify NUM_CLASSES in Tcnn.py
+"""
+
+import matplotlib.pyplot as plt
+
 from datagen import get_data_generator
 from tcnn.TcnnWithFC import TcnnWithFC
 from tcnn.TcnnWithoutFC import TcnnWithoutFC
@@ -6,13 +12,31 @@ from tensorflow.keras.models import load_model
 
 # save model to FILENAME
 FILENAME = 'butterfly_classification.h5'
-"""
-To change the number of categories, modify NUM_CLASSES in Tcnn.py
-"""
+
+def save_statistics(history):
+    # Plot training & validation accuracy values
+    plt.plot(history.history['acc'])
+    plt.plot(history.history['val_acc'])
+    plt.title('Model accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()
+    plt.savefig('test.jpg')
+
+    # Plot training & validation loss values
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('Model loss')
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()
+
 if __name__ == "__main__":
     # create model
     base_model = applications.VGG19()
-    tcnn = TcnnWithoutFC(base_model) # or TcnnWithoutFC (refer to TcnnWithoutFC.py for more information)
+    tcnn = TcnnWithFC(base_model) # or TcnnWithoutFC (refer to TcnnWithoutFC.py for more information)
     # model.unfreeze_layers(0) # hyperparameter to be tuned (refer to Tcnn.py for more information)
     tcnn.model.compile(optimizer='Adam',
         loss='categorical_crossentropy',
@@ -21,13 +45,16 @@ if __name__ == "__main__":
     # get data generators
     [train_generator, validation_generator] = get_data_generator()
 
-    # train
-    tcnn.model.fit(
+    # train and save history
+    history = tcnn.model.fit(
         train_generator,
         steps_per_epoch=4,
-        epochs=15,
+        epochs=20,
         validation_data=validation_generator,
         validation_steps=2) 
+
+    # save training statistics
+    save_statistics(history)
 
     # to save the model
     tcnn.model.save(FILENAME)
