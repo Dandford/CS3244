@@ -17,10 +17,10 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array, ImageDa
 
 CATEGORIES = ['Chocolate Pansy', 'Common Mormon', 'Common Palmfly', 'Grass Blue', 'Grass Yellow',
     'Lime', 'Little Tiger', 'Painted Jezebel', 'Tawny Coster']
-TEST_DIR = '../data/test_small/'
+TEST_DIR = '../data/uncropped/'
 
 IMG_SIZE = 224
-FILENAME = 'models/butterfly_classification_3.h5'
+MODEL = 'models/butterfly_classification_3.h5'
 
 def preprocess_image(img_path):
     img = load_img(img_path, target_size=(IMG_SIZE, IMG_SIZE))
@@ -29,13 +29,11 @@ def preprocess_image(img_path):
     img = preprocess_input(img)
     return img
 
-def predict_butterfly(img_path):
-    img = preprocess_image(img_path)
-    model = load_model(FILENAME)
-    result = model.predict(img)
-    return result
+def test(model_path=MODEL):
+    # load model
+    model = load_model(model_path)
 
-def test():
+    # get test data
     dirs = [file for file in os.listdir(TEST_DIR) if not file.startswith('.')]
     dirs = sorted(dirs)
 
@@ -50,8 +48,9 @@ def test():
         for img in images:
             if img.startswith('.'):
                 continue
-            img = prefix + img
-            result = predict_butterfly(img)
+            img_path = prefix + img
+            img = preprocess_image(img_path)
+            result = model.predict(img)
             prediction = np.argmax(result)
             predicted_labels.append(prediction)
             num_images += 1
@@ -70,4 +69,8 @@ def test():
     plt.show()
 
 if __name__ == "__main__":
-    test()
+    if len(sys.argv) == 2:
+        path = sys.argv[1]  
+        test(path)
+    else:
+        test()
