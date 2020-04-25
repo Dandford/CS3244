@@ -5,15 +5,17 @@ import seaborn as sn
 import matplotlib.pyplot as plt
 
 from tensorflow.keras.applications.vgg19 import preprocess_input
+# from tensorflow.keras.applications.mobilenet import preprocess_input
 from tensorflow.keras.models import load_model
 from tensorflow.keras.metrics import top_k_categorical_accuracy
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import load_img, img_to_array, ImageDataGenerator
+from tensorflow.keras.utils import plot_model
 
 # indicates where model is saved to (should correspond to that in train.py)
 FILENAME = 'butterfly_classification.h5'
 # default testing data's path (to get data, run ../data/label_data.py)
-TEST_DATA = "../data/test"
+TEST_DATA = "../data/cropped/test"
 # default image size to use
 IMG_SIZE = 224
 

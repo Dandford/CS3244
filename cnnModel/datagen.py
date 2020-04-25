@@ -1,8 +1,9 @@
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg19 import preprocess_input
+# from tensorflow.keras.applications.mobilenet import preprocess_input 
 
 IMG_SIZE = 224
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 
 """ 
 Creates data generator for test and validation. 
@@ -17,21 +18,20 @@ def get_data_generator():
         height_shift_range=0.2,
         preprocessing_function=preprocess_input,
         shear_range=0.2,
-        zoom_range=0.2,
+        zoom_range=0.35,
         horizontal_flip=True,
-        # rescale=1./255, # to be left out if it doesn't work well with vgg19
         fill_mode='nearest')
     
     test_datagen = image.ImageDataGenerator(
         preprocessing_function=preprocess_input)
 
     train_generator = train_datagen.flow_from_directory(
-        '../data/train',
+        '../data/cropped/train',
         target_size=(IMG_SIZE, IMG_SIZE),
         batch_size=BATCH_SIZE)
 
     validation_generator = test_datagen.flow_from_directory(
-        '../data/validation',
+        '../data/cropped/validation',
         target_size=(IMG_SIZE, IMG_SIZE),
         batch_size=BATCH_SIZE)
     

@@ -35,7 +35,8 @@ def save_statistics(history):
 
 if __name__ == "__main__":
     # create model
-    base_model = applications.VGG19()
+    # base_model = applications.VGG19()
+    base_model = applications.mobilenet_v2.MobileNetV2() 
     tcnn = TcnnWithFC(base_model) # or TcnnWithoutFC (refer to TcnnWithoutFC.py for more information)
     # model.unfreeze_layers(0) # hyperparameter to be tuned (refer to Tcnn.py for more information)
     tcnn.model.compile(optimizer='Adam',
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     history = tcnn.model.fit(
         train_generator,
         steps_per_epoch=4,
-        epochs=20,
+        epochs=60, 
         validation_data=validation_generator,
         validation_steps=2) 
 

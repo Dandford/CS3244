@@ -15,12 +15,11 @@ from tensorflow.keras.metrics import top_k_categorical_accuracy
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import load_img, img_to_array, ImageDataGenerator
 
-CATEGORIES = ['Chocolate Pansy', 'Common Mormon', 'Common Palmfly', 'Grass Blue', 'Grass Yellow',
-    'Lime', 'Little Tiger', 'Painted Jezebel', 'Tawny Coster']
+CATEGORIES = ['Chocolate Pansy', 'Grass Blue', 'Grass Yellow', 'Lime', 'Tawny Coster']
 TEST_DIR = '../data/uncropped/'
 
 IMG_SIZE = 224
-MODEL = 'models/butterfly_classification_3.h5'
+MODEL = 'models/butterfly_classification_1.h5'
 
 def preprocess_image(img_path):
     img = load_img(img_path, target_size=(IMG_SIZE, IMG_SIZE))
